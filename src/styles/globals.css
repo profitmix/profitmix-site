@@ -1,0 +1,89 @@
+/* src/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-dark: #0a0a0a;
+  --primary-gold: #d4af37;
+  --secondary-gold: #f4d03f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d4af37, #f4d03f);
+  border-radius: 4px;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #fff;
+}
+
+/* Glitter effect */
+.glitter-bg {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(244, 208, 63, 0.1) 2px, transparent 2px);
+  background-size: 50px 50px;
+}
+
+/* Gradient text */
+.gold-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Border gradients */
+.border-gradient {
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(var(--primary-dark), var(--primary-dark)) padding-box,
+    linear-gradient(135deg, #d4af37, #f4d03f) border-box;
+}
+/* Placeholder image styling */
+.image-placeholder {
+  background: linear-gradient(45deg, #1a1a1a 25%, #2a2a2a 25%, #2a2a2a 50%, #1a1a1a 50%, #1a1a1a 75%, #2a2a2a 75%, #2a2a2a);
+  background-size: 20px 20px;
+  position: relative;
+}
+
+.image-placeholder::after {
+  content: 'Image Placeholder';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(212, 175, 55, 0.5);
+  font-size: 14px;
+}
