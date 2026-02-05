@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/profitmix-site/static/css/main.050a3638.css",
-    "main.js": "/profitmix-site/static/js/main.8af22d62.js",
+    "main.css": "/profitmix-site/static/css/main.04997bc8.css",
+    "main.js": "/profitmix-site/static/js/main.cd76e1cf.js",
     "index.html": "/profitmix-site/index.html",
-    "main.050a3638.css.map": "/profitmix-site/static/css/main.050a3638.css.map",
-    "main.8af22d62.js.map": "/profitmix-site/static/js/main.8af22d62.js.map"
+    "main.04997bc8.css.map": "/profitmix-site/static/css/main.04997bc8.css.map",
+    "main.cd76e1cf.js.map": "/profitmix-site/static/js/main.cd76e1cf.js.map"
   },
   "entrypoints": [
-    "static/css/main.050a3638.css",
-    "static/js/main.8af22d62.js"
+    "static/css/main.04997bc8.css",
+    "static/js/main.cd76e1cf.js"
   ]
 }
