@@ -1,6 +1,6 @@
 // src/components/Home/HeroSection.jsx - UPDATED VERSION
 import React, { useEffect, useRef, useState } from 'react';
-import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Loader } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -9,42 +9,41 @@ gsap.registerPlugin(ScrollTrigger);
 const HeroSection = () => {
   const heroRef = useRef(null);
   const videoRef = useRef(null);
-  const [currentVideo, setCurrentVideo] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [videoError, setVideoError] = useState(false);
 
-  // Optimized video paths - Add YOUR videos here
-  const videos = [
-    {
-      src: '/assets/videos/hero/hero-1.mp4',
-      poster: '/assets/videos/hero/hero-1-poster.jpg', // First frame as thumbnail
-      fallback: '/assets/videos/hero/hero-1.webm', // WebM for better compression
-      alt: 'Sustainable Protein Production'
-    },
-    {
-      src: '/assets/videos/hero/hero-2.mp4',
-      poster: '/assets/videos/hero/hero-2-poster.jpg',
-      fallback: '/assets/videos/hero/hero-2.webm',
-      alt: 'Advanced Cultivation Technology'
-    },
-    {
-      src: '/assets/videos/hero/hero-3.mp4',
-      poster: '/assets/videos/hero/hero-3-poster.jpg',
-      fallback: '/assets/videos/hero/hero-3.webm',
-      alt: 'Circular Economy Process'
-    }
-  ];
+  // Video file - optimized for web
+  const backgroundVideo = `${process.env.PUBLIC_URL}/assets/videos/hero/hero-background.mp4`;
 
-  // Fallback image if videos fail
-  const fallbackImages = [
-    '/assets/images/hero/hero-1.jpg',
-    '/assets/images/hero/hero-2.jpg',
-    '/assets/images/hero/hero-3.jpg'
-  ];
+  // Fallback image in case video fails
+  const fallbackImage = `${process.env.PUBLIC_URL}/assets/images/hero/hero-background.jpg`;
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleCanPlay = () => {
+      setIsLoading(false);
+      // Auto-play when ready
+      video.play().catch(e => {
+        console.log('Auto-play prevented:', e);
+        setIsPlaying(false);
+      });
+    };
+
+    const handleError = () => {
+      setVideoError(true);
+      setIsLoading(false);
+    };
+
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('error', handleError);
+
+    // Preload video
+    video.load();
+
     // GSAP animations
     const ctx = gsap.context(() => {
       gsap.fromTo('.hero-title', 
@@ -65,141 +64,86 @@ const HeroSection = () => {
       );
     }, heroRef);
 
-    return () => ctx.revert();
+    return () => {
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('error', handleError);
+      ctx.revert();
+    };
   }, []);
 
-  useEffect(() => {
-    // Handle video playback
-    const videoElement = videoRef.current;
-    if (!videoElement) return;
-
-    const handleCanPlay = () => {
-      setIsVideoLoaded(true);
-      setVideoError(false);
-      if (isPlaying) {
-        videoElement.play().catch(e => {
-          console.log('Auto-play prevented:', e);
-          setIsPlaying(false);
-        });
-      }
-    };
-
-    const handleError = () => {
-      setVideoError(true);
-      setIsVideoLoaded(false);
-    };
-
-    const handleEnded = () => {
-      nextVideo();
-    };
-
-    videoElement.addEventListener('canplay', handleCanPlay);
-    videoElement.addEventListener('error', handleError);
-    videoElement.addEventListener('ended', handleEnded);
-
-    // Cleanup
-    return () => {
-      videoElement.removeEventListener('canplay', handleCanPlay);
-      videoElement.removeEventListener('error', handleError);
-      videoElement.removeEventListener('ended', handleEnded);
-    };
-  }, [currentVideo, isPlaying]);
-
-  const nextVideo = () => {
-    setCurrentVideo((prev) => (prev + 1) % videos.length);
-    setIsVideoLoaded(false);
-    setIsPlaying(true);
-  };
-
-  const prevVideo = () => {
-    setCurrentVideo((prev) => (prev - 1 + videos.length) % videos.length);
-    setIsVideoLoaded(false);
-    setIsPlaying(true);
-  };
-
   const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
+    if (!videoRef.current) return;
+    
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play().catch(e => console.log('Play error:', e));
     }
+    setIsPlaying(!isPlaying);
   };
 
   const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !isMuted;
     setIsMuted(!isMuted);
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-    }
   };
 
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Video Container - OPTIMIZED */}
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        {videoError ? (
-          // Fallback to image if video fails
-          <div className="absolute inset-0">
-            <img
-              src={fallbackImages[currentVideo]}
-              alt={videos[currentVideo]?.alt || 'Hero background'}
-              className="w-full h-full object-cover"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-dark-900/70 via-dark-900/40 to-dark-900/70" />
-          </div>
-        ) : (
-          // Video with multiple formats for compatibility
-          <div className="absolute inset-0">
+        {!videoError ? (
+          <>
             <video
               ref={videoRef}
-              key={currentVideo}
-              className="w-full h-full object-cover"
-              poster={videos[currentVideo]?.poster}
+              className="absolute inset-0 w-full h-full object-cover"
               muted={isMuted}
               loop
               playsInline
-              preload="metadata" // Load only metadata first
-              disablePictureInPicture
-              disableRemotePlayback
+              preload="metadata"
+              poster={fallbackImage}
+              aria-label="Background video showing sustainable protein production"
             >
-              {/* WebM format (better compression) */}
-              <source src={videos[currentVideo]?.fallback} type="video/webm" />
-              {/* MP4 format (fallback) */}
-              <source src={videos[currentVideo]?.src} type="video/mp4" />
-              {/* Fallback text */}
-              Your browser does not support the video tag.
+              <source src={backgroundVideo} type="video/mp4" />
+              <source src={backgroundVideo.replace('.mp4', '.webm')} type="video/webm" />
+              {/* Fallback to image if video not supported */}
+              <img src={fallbackImage} alt="Sustainable Protein Production" />
             </video>
             
             {/* Loading overlay */}
-            {!isVideoLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center bg-dark-900">
+            {isLoading && (
+              <div className="absolute inset-0 bg-dark-900 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="w-16 h-16 border-4 border-gold-500/30 border-t-gold-500 rounded-full animate-spin mx-auto mb-4"></div>
-                  <p className="text-gold-400">Loading video...</p>
+                  <Loader className="w-12 h-12 text-gold-400 animate-spin mx-auto mb-4" />
+                  <p className="text-gold-300">Loading video...</p>
                 </div>
               </div>
             )}
-            
-            {/* Gradient overlays */}
-            <div className="absolute inset-0 bg-gradient-to-b from-dark-900/80 via-dark-900/40 to-dark-900/80" />
-            <div className="absolute inset-0 bg-gradient-to-r from-dark-900/30 to-dark-900/30" />
-            <div className="absolute inset-0 glitter-bg opacity-30" />
-          </div>
+          </>
+        ) : (
+          // Fallback image if video fails
+          <div 
+            className="absolute inset-0 w-full h-full bg-cover bg-center"
+            style={{ backgroundImage: `url(${fallbackImage})` }}
+          />
         )}
+        
+        {/* Gradient overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-900/70 via-dark-900/40 to-dark-900/70" />
+        
+        {/* Glitter effect overlay */}
+        <div className="absolute inset-0 glitter-bg opacity-30" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="max-w-5xl mx-auto">
-          <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
             <span className="gold-gradient font-playfair">
               Powering the Future of Protein
             </span>
             <br />
-            <span className="text-white text-3xl md:text-5xl lg:text-6xl">
+            <span className="text-white">
               Through Sustainable Innovation
             </span>
           </h1>
@@ -228,70 +172,32 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Video Controls - Only show when video is loaded */}
-      {isVideoLoaded && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center space-x-4 bg-dark-900/60 backdrop-blur-md rounded-full px-4 py-2 border border-gold-500/30">
-          <button
-            onClick={prevVideo}
-            className="p-2 rounded-full hover:bg-gold-500/20 transition-colors"
-            aria-label="Previous video"
-          >
-            <ChevronLeft className="w-5 h-5 text-gold-400" />
-          </button>
-          
-          <button
-            onClick={togglePlayPause}
-            className="p-2 rounded-full hover:bg-gold-500/20 transition-colors"
-            aria-label={isPlaying ? "Pause video" : "Play video"}
-          >
-            {isPlaying ? (
-              <Pause className="w-5 h-5 text-gold-400" />
-            ) : (
-              <Play className="w-5 h-5 text-gold-400" />
-            )}
-          </button>
-          
-          <button
-            onClick={toggleMute}
-            className="p-2 rounded-full hover:bg-gold-500/20 transition-colors"
-            aria-label={isMuted ? "Unmute video" : "Mute video"}
-          >
-            {isMuted ? (
-              <VolumeX className="w-5 h-5 text-gold-400" />
-            ) : (
-              <Volume2 className="w-5 h-5 text-gold-400" />
-            )}
-          </button>
-          
-          <button
-            onClick={nextVideo}
-            className="p-2 rounded-full hover:bg-gold-500/20 transition-colors"
-            aria-label="Next video"
-          >
-            <ChevronRight className="w-5 h-5 text-gold-400" />
-          </button>
-          
-          {/* Video indicator dots */}
-          <div className="flex items-center space-x-2 ml-2">
-            {videos.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentVideo(index);
-                  setIsVideoLoaded(false);
-                  setIsPlaying(true);
-                }}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentVideo
-                    ? 'w-6 bg-gold-500'
-                    : 'bg-gray-600 hover:bg-gray-500'
-                }`}
-                aria-label={`Go to video ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Video Controls */}
+      {/* <div className="absolute bottom-8 right-8 z-20 flex items-center space-x-4">
+        <button
+          onClick={toggleMute}
+          className="p-3 rounded-full bg-dark-800/50 backdrop-blur-sm border border-gold-500/30 hover:bg-gold-500/20 transition-colors"
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+        >
+          {isMuted ? (
+            <VolumeX className="w-5 h-5 text-gold-400" />
+          ) : (
+            <Volume2 className="w-5 h-5 text-gold-400" />
+          )}
+        </button>
+        
+        <button
+          onClick={togglePlayPause}
+          className="p-3 rounded-full bg-dark-800/50 backdrop-blur-sm border border-gold-500/30 hover:bg-gold-500/20 transition-colors"
+          aria-label={isPlaying ? "Pause video" : "Play video"}
+        >
+          {isPlaying ? (
+            <Pause className="w-5 h-5 text-gold-400" />
+          ) : (
+            <Play className="w-5 h-5 text-gold-400" />
+          )}
+        </button>
+      </div> */}
 
       {/* Scroll indicator */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">

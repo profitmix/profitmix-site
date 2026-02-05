@@ -1,5 +1,5 @@
-// src/components/Shared/ImageCarousel.jsx
-import React, { useRef, useEffect } from 'react';
+// src/components/Shared/ImageCarousel.jsx - UPDATED
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
@@ -7,22 +7,19 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-const ImageCarousel = ({ images }) => {
-  const swiperRef = useRef(null);
-
+const ImageCarousel = ({ images, className = '' }) => {
   // Default images if none provided
   const defaultImages = [
-    { src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop', alt: 'Protein Production' },
-    { src: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=800&auto=format&fit=crop', alt: 'Sustainable Farming' },
-    { src: 'https://images.unsplash.com/photo-1578911372310-3e25c610332f?w=800&auto=format&fit=crop', alt: 'Quality Control' },
+    { src: '/assets/images/placeholders/process-1.jpg', alt: 'Protein Production' },
+    { src: '/assets/images/placeholders/process-2.jpg', alt: 'Sustainable Farming' },
+    { src: '/assets/images/placeholders/process-3.jpg', alt: 'Quality Control' },
   ];
 
   const carouselImages = images?.length > 0 ? images : defaultImages;
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       <Swiper
-        ref={swiperRef}
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         spaceBetween={30}
         slidesPerView={1}
@@ -45,6 +42,10 @@ const ImageCarousel = ({ images }) => {
                 alt={image.alt}
                 className="w-full h-full object-cover"
                 loading="lazy"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/assets/images/placeholders/default.jpg';
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
@@ -54,16 +55,6 @@ const ImageCarousel = ({ images }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      
-      <style jsx>{`
-        .swiper-button-next,
-        .swiper-button-prev {
-          color: #d4af37 !important;
-        }
-        .swiper-pagination-bullet {
-          background: #d4af37 !important;
-        }
-      `}</style>
     </div>
   );
 };
