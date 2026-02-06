@@ -59,11 +59,13 @@ const AboutPage = () => {
 
   // Sample images for carousel
   const aboutImages = [
-    { src: '/assets/images/about-1.jpg', alt: 'Our Facility' },
-    { src: '/assets/images/about-2.jpg', alt: 'Team Working' },
-    { src: '/assets/images/about-3.jpg', alt: 'Research Lab' },
-    { src: '/assets/images/about-4.jpg', alt: 'Production Area' },
-  ];
+  { src: `${process.env.PUBLIC_URL}/assets/images/about/facility.jpeg`, alt: 'Our Facility' },
+  { src: `${process.env.PUBLIC_URL}/assets/images/about/control-room.jpeg`, alt: 'Control Room' },
+  { src: `${process.env.PUBLIC_URL}/assets/images/about/research-lab.jpeg`, alt: 'Research Lab' },
+  { src: `${process.env.PUBLIC_URL}/assets/images/about/production.jpeg`, alt: 'Production Area' },
+  { src: `${process.env.PUBLIC_URL}/assets/images/about/team-collab.jpeg`, alt: 'Team Collaboration' },
+  { src: `${process.env.PUBLIC_URL}/assets/images/about/quality-check.jpeg`, alt: 'Quality Check' },
+];
 
   const values = [
     {
@@ -149,17 +151,22 @@ const AboutPage = () => {
                   <div className="w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden border-4 border-gold-500/30 shadow-2xl">
                     {/* Placeholder for founder image */}
                     <div className="w-full h-full bg-gradient-to-br from-dark-700 to-dark-900 flex items-center justify-center">
-                      <Award className="w-32 h-32 text-gold-500/50" />
+                      {/* <Award className="w-32 h-32 text-gold-500/50" /> */}
+                      <img
+                        src={`${process.env.PUBLIC_URL}/assets/images/team/founder/founder.jpeg`}
+                        alt="Founder"
+                        className="w-full h-full object-cover rounded-full"
+                      />
                     </div>
                   </div>
                   <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-gold-500 to-gold-700 rounded-full flex items-center justify-center text-dark-900 font-bold text-sm p-4 text-center shadow-2xl">
-                    Founder & MD
+                    Founder
                   </div>
                 </div>
                 
                 <div className="text-center mt-8">
-                  <h3 className="text-2xl font-bold text-white mb-2">A. ISRATH AMRIN</h3>
-                  <p className="text-gold-400 font-medium">Founder & Managing Director</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">A . ISRATH AMRIN</h3>
+                  <p className="text-gold-400 font-medium">Founder & Proprietor</p>
                   <p className="text-gray-400 mt-4 max-w-md mx-auto">
                     With a focus on sustainable systems, process-driven operations, and long-term scalability.
                   </p>

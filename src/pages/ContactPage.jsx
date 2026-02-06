@@ -169,7 +169,7 @@ const ContactPage = () => {
                   icon: MapPin,
                   title: 'Location',
                   details: [
-                    { label: 'Headquarters', value: 'India' },
+                    { label: 'Headquarters', value: 'Chennai,Tamilnadu,India' },
                     { label: 'Operations', value: 'Multiple Facilities' },
                   ],
                   color: 'from-green-500 to-emerald-500',
@@ -354,7 +354,7 @@ const ContactPage = () => {
                       </div>
                       <div className="absolute bottom-4 left-4 right-4 bg-dark-900/80 backdrop-blur-sm rounded-lg p-4">
                         <p className="text-white text-center">
-                          ProfitMix Headquarters • India
+                          ProfitMix Headquarters • Chennai,Tamilnadu,India
                         </p>
                       </div>
                     </div>

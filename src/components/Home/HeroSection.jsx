@@ -172,39 +172,12 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Video Controls */}
-      {/* <div className="absolute bottom-8 right-8 z-20 flex items-center space-x-4">
-        <button
-          onClick={toggleMute}
-          className="p-3 rounded-full bg-dark-800/50 backdrop-blur-sm border border-gold-500/30 hover:bg-gold-500/20 transition-colors"
-          aria-label={isMuted ? "Unmute video" : "Mute video"}
-        >
-          {isMuted ? (
-            <VolumeX className="w-5 h-5 text-gold-400" />
-          ) : (
-            <Volume2 className="w-5 h-5 text-gold-400" />
-          )}
-        </button>
-        
-        <button
-          onClick={togglePlayPause}
-          className="p-3 rounded-full bg-dark-800/50 backdrop-blur-sm border border-gold-500/30 hover:bg-gold-500/20 transition-colors"
-          aria-label={isPlaying ? "Pause video" : "Play video"}
-        >
-          {isPlaying ? (
-            <Pause className="w-5 h-5 text-gold-400" />
-          ) : (
-            <Play className="w-5 h-5 text-gold-400" />
-          )}
-        </button>
-      </div> */}
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+      {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
         <div className="w-6 h-10 border-2 border-gold-500 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-gold-400 rounded-full mt-2 animate-pulse"></div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

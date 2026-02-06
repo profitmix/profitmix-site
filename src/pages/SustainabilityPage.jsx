@@ -127,10 +127,10 @@ const SustainabilityPage = () => {
             
             <h1 className="sustainability-title text-4xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent">
-                Sustainability Is Not an Initiative.
+                Sustainability Is Not an Initiative
               </span>
               <br />
-              <span className="text-white">It Is the System.</span>
+              <span className="text-white">It Is the System</span>
             </h1>
             
             <p className="sustainability-subtitle text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">

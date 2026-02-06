@@ -73,9 +73,9 @@ const CallToAction = () => {
           </div>
           
           <h2 className="cta-title text-3xl md:text-5xl font-bold mb-6">
-            <span className="gold-gradient">This is not a short-term venture.</span>
+            <span className="gold-gradient">This is not a short-term venture</span>
             <br />
-            <span className="text-white">This is long-life protein infrastructure.</span>
+            <span className="text-white">This is long-life protein infrastructure</span>
           </h2>
           
           <p className="cta-subtitle text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
@@ -104,7 +104,7 @@ const CallToAction = () => {
             {[
               {
                 label: 'Strategic Partnerships',
-                value: '50+',
+                value: 'Emerging',
                 description: 'Global collaborations'
               },
               {

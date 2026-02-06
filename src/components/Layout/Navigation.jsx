@@ -14,11 +14,11 @@ const Navigation = () => {
     { 
       name: 'About', 
       path: '/about',
-      subItems: [
-        { name: 'Our Story', path: '/about#story' },
-        { name: 'Leadership', path: '/about#leadership' },
-        { name: 'Values', path: '/about#values' },
-      ]
+      // subItems: [
+      //   { name: 'Our Story', path: '/about#story' },
+      //   { name: 'Leadership', path: '/about#leadership' },
+      //   { name: 'Values', path: '/about#values' },
+      // ]
     },
     { name: 'Our Process', path: '/process' },
     { name: 'Sustainability', path: '/sustainability' },

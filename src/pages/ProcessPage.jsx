@@ -199,9 +199,8 @@ const ProcessPage = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center space-x-2 mb-6">
-              <Factory className="w-8 h-8 text-gold-400" />
               <h1 className="text-4xl md:text-5xl font-bold gold-gradient">
-                Engineered Precision. Biological Efficiency.
+                Farm Meets Function<br></br>Nature Meets Tech
               </h1>
             </div>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
@@ -225,7 +224,7 @@ const ProcessPage = () => {
 
             {/* Steps */}
             <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-              {processSteps.slice(0, 4).map((step, index) => (
+              {processSteps.slice(0, 8).map((step, index) => (
                 <div key={step.id} className="process-step">
                   <div 
                     className={`relative cursor-pointer group ${index % 2 === 0 ? 'md:mb-20' : 'md:mt-20'}`}
@@ -383,21 +382,41 @@ const ProcessPage = () => {
       </section>
 
       {/* Process Gallery */}
-      <section className="py-16">
+      {/* <section className="py-16">
         <div className="container mx-auto px-6">
           <h3 className="text-2xl font-bold text-center mb-12 text-white">
             Process Visualization
           </h3>
           <ImageCarousel 
             images={[
-              { src: '/assets/images/process-1.jpg', alt: 'Feed Preparation' },
-              { src: '/assets/images/process-2.jpg', alt: 'Cultivation' },
-              { src: '/assets/images/process-3.jpg', alt: 'Processing' },
-              { src: '/assets/images/process-4.jpg', alt: 'Quality Control' },
+              { src: `${process.env.PUBLIC_URL}/assets/images/process-1.jpg`, alt: 'Feed Preparation' },
+              { src: `${process.env.PUBLIC_URL}/assets/images/process-2.jpg`, alt: 'Cultivation' },
+              { src: `${process.env.PUBLIC_URL}/assets/images/process-3.jpg`, alt: 'Processing' },
+              { src: `${process.env.PUBLIC_URL}/assets/images/process-4.jpg`, alt: 'Quality Control' },
             ]} 
           />
         </div>
-      </section>
+      </section> */}
+      {/* Process Gallery */}
+<section className="py-16">
+  <div className="container mx-auto px-6">
+    <h3 className="text-2xl font-bold text-center mb-12 text-white">
+      Process Visualization
+    </h3>
+    <ImageCarousel 
+      images={[
+        { src: `${process.env.PUBLIC_URL}/assets/images/process/feed.jpeg`, alt: 'Feed Preparation' },
+        { src: `${process.env.PUBLIC_URL}/assets/images/process/cultivation.jpeg`, alt: 'Controlled Cultivation' },
+        { src: `${process.env.PUBLIC_URL}/assets/images/process/harvest.jpeg`, alt: 'Automated Harvesting' },
+        { src: `${process.env.PUBLIC_URL}/assets/images/process/processing.jpeg`, alt: 'Processing' },
+        { src: `${process.env.PUBLIC_URL}/assets/images/process/drying.jpeg`, alt: 'Drying Technology' },
+        { src: `${process.env.PUBLIC_URL}/assets/images/process/powdering.jpeg`, alt: 'Powdering Process' },
+        { src: `${process.env.PUBLIC_URL}/assets/images/process/quality-testing.jpeg`, alt: 'Quality Testing' },
+        { src: `${process.env.PUBLIC_URL}/assets/images/process/packaging.jpeg`, alt: 'Final Packaging' },
+      ]} 
+    />
+  </div>
+  </section>
 
       {/* Call to Action */}
       <section className="py-20 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900">

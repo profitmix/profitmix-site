@@ -1,6 +1,13 @@
 // src/components/Home/ProcessOverview.jsx
 import React, { useEffect, useRef } from 'react';
-import { Factory, Package, TestTube2, Shield } from 'lucide-react';
+import { Factory, Package, TestTube2, Repeat,ShieldCheck, Maximize2 } from 'lucide-react';
+import {  
+  Tractor,          // farming/harvest
+  Scissors,         // cutting / harvest
+  SunMedium,        // drying (closest sun icon)
+  Leaf,             // cultivation / plant growth
+  TestTubes         // quality control (multiple test tubes)
+} from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -10,14 +17,14 @@ const ProcessOverview = () => {
   const sectionRef = useRef(null);
 
   const steps = [
-    { name: 'Feed', icon: Package },
-    { name: 'Cultivation', icon: Factory },
-    { name: 'Harvest', icon: Factory },
-    { name: 'Processing', icon: Factory },
-    { name: 'Drying', icon: Factory },
-    { name: 'Powdering', icon: Package },
-    { name: 'Quality Control', icon: TestTube2 },
-    { name: 'Packaging', icon: Package },
+   { name: 'Feed', icon: Package },
+  { name: 'Cultivation', icon: Leaf },
+  { name: 'Harvest', icon: Tractor },
+  { name: 'Processing', icon: Factory },
+  { name: 'Drying', icon: SunMedium },
+  { name: 'Powdering', icon: Scissors }, 
+  { name: 'Quality Control', icon: TestTubes },
+  { name: 'Packaging', icon: Package },
   ];
 
   useEffect(() => {
@@ -98,17 +105,17 @@ const ProcessOverview = () => {
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6 bg-dark-800/50 rounded-xl border border-gold-500/20">
-              <Shield className="w-12 h-12 text-gold-400 mx-auto mb-4" />
+              <Repeat className="w-12 h-12 text-gold-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-white mb-3">Consistency</h3>
               <p className="text-gray-400">Each step designed for uniform quality output</p>
             </div>
             <div className="text-center p-6 bg-dark-800/50 rounded-xl border border-gold-500/20">
-              <Shield className="w-12 h-12 text-gold-400 mx-auto mb-4" />
+              <ShieldCheck className="w-12 h-12 text-gold-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-white mb-3">Safety</h3>
               <p className="text-gray-400">Built-in protocols at every production stage</p>
             </div>
             <div className="text-center p-6 bg-dark-800/50 rounded-xl border border-gold-500/20">
-              <Shield className="w-12 h-12 text-gold-400 mx-auto mb-4" />
+              <Maximize2 className="w-12 h-12 text-gold-400 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-white mb-3">Scale</h3>
               <p className="text-gray-400">Industrial capacity with precision control</p>
             </div>

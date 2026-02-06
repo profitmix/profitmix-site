@@ -1,7 +1,7 @@
 // src/components/Layout/Footer.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
+import { Mail, MapPin, Phone, Linkedin, Twitter, Instagram, Facebook, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -20,6 +20,7 @@ const Footer = () => {
     { icon: Twitter, href: 'https://twitter.com/profitmix', label: 'Twitter' },
     { icon: Instagram, href: 'https://instagram.com/profitmix', label: 'Instagram' },
     { icon: Facebook, href: 'https://facebook.com/profitmix', label: 'Facebook' },
+    { icon: MessageCircle, href: 'https://facebook.com/profitmix', label: 'MessageCircle' },
   ];
 
   return (
@@ -29,15 +30,21 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 border-2 border-gold-500 rounded-full flex items-center justify-center">
+              {/* <div className="w-10 h-10 border-2 border-gold-500 rounded-full flex items-center justify-center">
                 <div className="w-6 h-6 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full"></div>
-              </div>
+              </div> */}
+              {/* <Link to="/" className="flex items-center space-x-3 group"> */}
+              <img
+                src={`${process.env.PUBLIC_URL}/logo.png`}
+                alt="image"
+                className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300"
+              />
               <div>
                 <span className="text-2xl font-bold tracking-wider gold-gradient font-playfair">
-                  ProfitMix
+                  ProFit Mix
                 </span>
-                <span className="text-xs text-gold-300/70 tracking-widest uppercase block">
-                  Sustainable Protein
+                <span className="text-xs text-white-300/70 tracking-widest uppercase block">
+                  NEXT GENERATION PROTEIN
                 </span>
               </div>
             </div>
@@ -104,7 +111,7 @@ const Footer = () => {
                 <MapPin className="w-5 h-5 text-gold-400 mt-1" />
                 <div>
                   <p className="text-gray-400">Location</p>
-                  <p className="text-white">India</p>
+                  <p className="text-white">Chennai,Tamilnadu,India</p>
                 </div>
               </li>
             </ul>
@@ -143,9 +150,6 @@ const Footer = () => {
               </Link>
               <Link to="/terms" className="text-gray-400 hover:text-gold-400 text-sm transition-colors">
                 Terms of Service
-              </Link>
-              <Link to="/sitemap" className="text-gray-400 hover:text-gold-400 text-sm transition-colors">
-                Sitemap
               </Link>
             </div>
           </div>

@@ -35,9 +35,9 @@ const Header = () => {
           />
             <div className="flex flex-col">
               <span className="text-2xl font-bold tracking-wider gold-gradient font-playfair">
-                PROFITMIX
+                ProFit Mix
               </span>
-              <span className="text-xs text-gray-400/70 tracking-widest uppercase">
+              <span className="text-xs text-white-400/70 tracking-widest uppercase">
               NEXT GENERATION PROTEIN
               </span>
             </div>

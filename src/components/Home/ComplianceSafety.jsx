@@ -1,6 +1,6 @@
 // src/components/Home/ComplianceSafety.jsx
 import React, { useEffect, useRef } from 'react';
-import { Shield, FileCheck, Award, CheckCircle } from 'lucide-react';
+import { Shield, FileCheck, Award, CheckCircle, FileText,CheckSquare } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -17,7 +17,7 @@ const ComplianceSafety = () => {
       status: 'Implemented',
     },
     {
-      icon: Shield,
+      icon: FileText,
       title: 'Regulatory Frameworks',
       description: 'Alignment with national and international standards',
       status: 'Active',
@@ -112,7 +112,7 @@ const ComplianceSafety = () => {
             <div className="safety-badge flex-shrink-0">
               <div className="relative">
                 <div className="w-24 h-24 rounded-full bg-gradient-to-br from-gold-600 to-gold-800 flex items-center justify-center shadow-2xl">
-                  <Shield className="w-12 h-12 text-white" />
+                  <CheckSquare className="w-12 h-12 text-white" />
                 </div>
                 <div className="absolute -inset-2 border-2 border-gold-500/30 rounded-full animate-pulse"></div>
               </div>

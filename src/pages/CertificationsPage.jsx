@@ -18,7 +18,7 @@ const CertificationsPage = () => {
       description: 'Registered as Micro, Small & Medium Enterprise',
       icon: FileCheck,
       color: 'from-green-500 to-emerald-600',
-      date: '2023'
+      date: '2025'
     },
     {
       status: 'in-progress',
@@ -27,7 +27,7 @@ const CertificationsPage = () => {
       description: 'Food safety compliance for nationwide operations',
       icon: Shield,
       color: 'from-gold-500 to-yellow-600',
-      date: 'Q2 2024'
+      date: '2026'
     },
     {
       status: 'planned',
@@ -36,7 +36,7 @@ const CertificationsPage = () => {
       description: 'Hazard Analysis Critical Control Point system',
       icon: Award,
       color: 'from-blue-500 to-cyan-600',
-      date: '2024'
+      date: '2026'
     },
     {
       status: 'planned',
@@ -45,7 +45,7 @@ const CertificationsPage = () => {
       description: 'Food safety management system certification',
       icon: Award,
       color: 'from-purple-500 to-pink-600',
-      date: '2024'
+      date: '2026'
     },
     {
       status: 'planned',
@@ -54,7 +54,7 @@ const CertificationsPage = () => {
       description: 'Import Export Code for international trade',
       icon: TrendingUp,
       color: 'from-orange-500 to-red-600',
-      date: '2024'
+      date: '2026'
     }
   ];
 
@@ -171,7 +171,8 @@ const CertificationsPage = () => {
             </h1>
             
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-              In food and protein manufacturing, compliance is not optional. It is the foundation of trust.
+              In food and protein manufacturing, compliance is not optional. <br>
+              </br>It is the foundation of trust.
             </p>
             
             <div className="w-32 h-1 bg-gradient-to-r from-gold-400 to-gold-600 mx-auto" />
